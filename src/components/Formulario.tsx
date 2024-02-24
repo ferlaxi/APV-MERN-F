@@ -22,9 +22,9 @@ const Formulario = () => {
       setAlerta({
         msg: "Todos los campos son necesarios",
         error: true,
-        usado: usado
+        usado: usado,
       });
-      return setUsado(!usado)
+      return setUsado(!usado);
     }
     guardarPaciente({ nombre, propietario, fecha, email, sintomas, id });
     setUsado(true);
@@ -33,7 +33,7 @@ const Formulario = () => {
       error: false,
       usado: usado,
     });
-    setUsado(!usado)
+    setUsado(!usado);
     setNombre("");
     setPropietario("");
     setEmail("");
@@ -43,6 +43,7 @@ const Formulario = () => {
   };
 
   const { msg }: any = alerta;
+
 
   useEffect(() => {
     if (paciente?.nombre) {
@@ -55,6 +56,7 @@ const Formulario = () => {
     }
   }, [paciente]);
 
+  
   return (
     <>
       <h1 className="font-black text-2xl text-center text-gray-700">

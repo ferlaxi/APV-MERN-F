@@ -51,12 +51,11 @@ const PacientesProvider = ({ children }: any) => {
           paciente,
           config
         );
-
         const pacienteActualizado = pacientes.map((pacienteState: any) =>
-          pacienteState._id === data._id ? data : pacienteState
+          pacienteState._id === data.pacienteActualizado._id ? data.pacienteActualizado : pacienteState
         );
-
         setPacientes(pacienteActualizado);
+        window.location.reload();
       } catch (error) {
         console.log(error);
       }
