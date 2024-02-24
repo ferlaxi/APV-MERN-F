@@ -55,7 +55,6 @@ const PacientesProvider = ({ children }: any) => {
           pacienteState._id === data.pacienteActualizado._id ? data.pacienteActualizado : pacienteState
         );
         setPacientes(pacienteActualizado);
-        window.location.reload();
       } catch (error) {
         console.log(error);
       }

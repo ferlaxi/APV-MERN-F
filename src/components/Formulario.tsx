@@ -44,7 +44,6 @@ const Formulario = () => {
 
   const { msg }: any = alerta;
 
-
   useEffect(() => {
     if (paciente?.nombre) {
       setNombre(paciente.nombre);
@@ -56,7 +55,15 @@ const Formulario = () => {
     }
   }, [paciente]);
 
-  
+  useEffect(() => {
+    setNombre("");
+    setPropietario("");
+    setEmail("");
+    setSintomas("");
+    setFecha("");
+    setId(null);
+  },  [])
+
   return (
     <>
       <h1 className="font-black text-2xl text-center text-gray-700">
