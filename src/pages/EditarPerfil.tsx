@@ -15,9 +15,11 @@ const EditarPerfil = () => {
   const [alerta, setAlerta] = useState({});
   const { auth, actualizarPerfil }: any = useAuth();
 
+  
   useEffect(() => {
     setPerfil(auth.veterinario);
-  }, [auth, auth.veterinario]);
+  }, [auth]);
+
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();

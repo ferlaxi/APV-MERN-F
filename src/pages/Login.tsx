@@ -3,7 +3,7 @@ import { useState } from "react";
 import Alerta from "../components/Alerta";
 import clienteAxios from "../config/axios";
 import useAuth from "../hooks/useAuth";
-import logo from "../assets/cat-svgrepo-com black.svg"
+import logo from "../assets/cat-svgrepo-com black.svg";
 
 const Login = () => {
   const [alerta, setAlerta] = useState({});
@@ -13,10 +13,11 @@ const Login = () => {
 
   const { msg }: any = alerta;
   const navigate = useNavigate();
-  const { setAuth }: any = useAuth();
+  const { setAuth, setAux, aux }: any = useAuth();
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
+    
 
     if ([email, password].includes("")) {
       setUsado(true);
@@ -34,8 +35,9 @@ const Login = () => {
         password,
       });
       localStorage.setItem("token", data.token);
-      setAuth(data);
       navigate("/admin");
+      setAuth(data);
+      setAux(!aux)
     } catch (error: any) {
       setUsado(true);
       setAlerta({

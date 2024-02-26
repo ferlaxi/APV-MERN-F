@@ -6,6 +6,7 @@ const AuthContext = createContext({});
 const AuthProvider = ({ children }: any) => {
   const [auth, setAuth] = useState({});
   const [cargando, setCargando] = useState(true);
+  const [aux, setAux] = useState(false);
 
   useEffect(() => {
     const autenticarUsuario = async () => {
@@ -33,7 +34,7 @@ const AuthProvider = ({ children }: any) => {
       setCargando(false);
     };
     autenticarUsuario();
-  }, []);
+  }, [aux]);
 
   const cerrarSesion = () => {
     localStorage.removeItem("token");
@@ -139,6 +140,8 @@ const AuthProvider = ({ children }: any) => {
         cerrarSesion,
         actualizarPerfil,
         guardarPassword,
+        setAux,
+        aux,
       }}
     >
       {children}
