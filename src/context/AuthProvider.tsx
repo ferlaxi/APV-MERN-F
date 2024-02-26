@@ -33,7 +33,7 @@ const AuthProvider = ({ children }: any) => {
       setCargando(false);
     };
     autenticarUsuario();
-  }, [auth]);
+  }, []);
 
   const cerrarSesion = () => {
     localStorage.removeItem("token");
@@ -57,33 +57,28 @@ const AuthProvider = ({ children }: any) => {
 
     const { nombre, email }: any = datos;
     if ([nombre, email].includes("")) {
-      return [
-        {
-          msg: "Email y Nombre son obligatorios",
-          error: true,
-          usado: !datoUsado,
-        },
-      ];
+      return {
+        msg: "Email y Nombre son obligatorios",
+        error: true,
+        usado: !datoUsado,
+      };
     }
-
     try {
       const url = `/veterinarios/perfil/${datos._id}`;
       await clienteAxios.put(url, datos, config);
-      return [
-        {
-          msg: "Almacenado correctamente",
-          error: false,
-          usado: !datoUsado,
-        },
-      ];
+      const { data } = await clienteAxios.get("/veterinarios/perfil", config);
+      setAuth(data);
+      return {
+        msg: "Almacenado correctamente",
+        error: false,
+        usado: !datoUsado,
+      };
     } catch (error: any) {
-      return [
-        {
-          msg: error.response.data.message,
-          error: true,
-          usado: !datoUsado,
-        },
-      ];
+      return {
+        msg: error.response.data.message,
+        error: true,
+        usado: !datoUsado,
+      };
     }
   };
 

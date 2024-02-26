@@ -5,21 +5,26 @@ import Alerta from "../components/Alerta";
 
 const EditarPerfil = () => {
   const [usado, setUsado] = useState(false);
-  const [perfil, setPerfil] = useState<any>({});
+  const [perfil, setPerfil] = useState({
+    email: "",
+    nombre: "",
+    telefono: "",
+    web: "",
+    _id: "",
+  });
   const [alerta, setAlerta] = useState({});
   const { auth, actualizarPerfil }: any = useAuth();
 
   useEffect(() => {
     setPerfil(auth.veterinario);
-  }, [auth]);
+  }, [auth, auth.veterinario]);
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
 
     const resultado = await actualizarPerfil(perfil, usado);
-    
-    setAlerta(resultado[0]);
-    setUsado(resultado[0].usado)
+    setAlerta(resultado);
+    setUsado(resultado.usado);
   };
 
   const { msg }: any = alerta;
@@ -45,7 +50,7 @@ const EditarPerfil = () => {
                 className="w-full rounded-lg border-1 border-gray-300 focus:border-indigo-600 p-3 bg-gray-50 mt-2"
                 placeholder="Ingrese Nombre"
                 name="nombre"
-                defaultValue={perfil?.nombre || ""}
+                defaultValue={perfil?.nombre}
                 onChange={(e) =>
                   setPerfil({
                     ...perfil,
@@ -62,7 +67,7 @@ const EditarPerfil = () => {
                 className="w-full rounded-lg border-1 border-gray-300 focus:border-indigo-600 p-3 bg-gray-50 mt-2"
                 placeholder="Ingrese su Sitio Web"
                 name="web"
-                defaultValue={perfil?.web || ""}
+                defaultValue={perfil?.web}
                 onChange={(e) =>
                   setPerfil({
                     ...perfil,
@@ -79,7 +84,7 @@ const EditarPerfil = () => {
                 className="w-full rounded-lg border-1 border-gray-300 focus:border-indigo-600 p-3 bg-gray-50 mt-2"
                 placeholder="Ingrese su Teléfono"
                 name="telefono"
-                defaultValue={perfil?.telefono || ""}
+                defaultValue={perfil?.telefono}
                 onChange={(e) =>
                   setPerfil({
                     ...perfil,
@@ -96,7 +101,7 @@ const EditarPerfil = () => {
                 className="w-full rounded-lg border-1 border-gray-300 focus:border-indigo-600 p-3 bg-gray-50 mt-2"
                 placeholder="Ingrese su Email"
                 name="email"
-                defaultValue={perfil?.email || ""}
+                defaultValue={perfil?.email}
                 onChange={(e) =>
                   setPerfil({
                     ...perfil,
